@@ -100,10 +100,13 @@ function this.createWindow()
 
   local b1 = newBlock(menu)
   local txtOpenAvail = makeClickable{parent = b1, id = this.id.main.availBtn, text = s.avFx, pad = 4, fun = this.openAvailFXMenu}
+
   local b2 = newBlock(menu)
   local txtOpenIngr = makeClickable{parent = b2, id = this.id.main.ingrBtn, text = s.curIngr, pad = 4, fun = this.openIngrMenu}
+
   local b3 = newBlock(menu)
   local txtOpenFullFx = makeClickable{parent = b3, id = this.id.main.filterBtn, text = s.allFx, pad = 4, fun = this.openFullFXMenu}
+
   local b4 = newBlock(menu)
   local txtCancel = makeClickable{parent = b4, id = this.id.main.exitBtn, text = s.ex, pad = 4, fun = this.mainCancelBtnPress, color = c.red}
 

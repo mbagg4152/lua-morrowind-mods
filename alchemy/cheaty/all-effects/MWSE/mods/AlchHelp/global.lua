@@ -1,0 +1,1 @@
+g.click = "mouseClick"
