@@ -56,11 +56,8 @@ function this.init()
 
   -- color
   c = {}
-  c.black = rgbFloat(0,0,0)
-  c.def = rgbFloat(202,165,96) -- default morrowind menu text color
-  c.dis = rgbFloat(102,102,102)
+  c.default = rgbFloat(202,165,96) -- default morrowind menu text color
   c.red = rgbFloat(171, 0, 0)
-  c.white = rgbFloat(255,255,255)
 
   f = {}
   f.allSame = 'a'
@@ -235,7 +232,7 @@ function this.ingredients_menu(e)
   if (tes3ui.findMenu(this.id.ingr.menu) ~= nil) then return end
 
   for _,v in pairs(this.player_ingreds) do
-    local fx = debugFXList(v.object.effects,v.object.effectAttributeIds, v.effectsSkillIds)
+    local fx = debug_fx_list(v.object.effects,v.object.effectAttributeIds, v.effectsSkillIds)
   end
 
   local ingrMenu = make_menu(this.id.ingr.menu)
@@ -278,7 +275,7 @@ function mk_ingr_list(p)
 end
 
 -- used for debug/testing purposes
-function debugFXList(fxId, attribId, skillId)
+function debug_fx_list(fxId, attribId, skillId)
   local namelist = ""
   for index,data in ipairs(fxId) do
     local skill = nil
@@ -321,16 +318,37 @@ function make_clickable(data)
   local dc = data.color
   if (data.fun ~= nil) then clk:register(g.CLICK, data.fun) end
   if (dc ~= nil) then
-    clk.color = dc; clk.widget.idle = dc; clk.widget.idleActive = dc; clk.widget.idleDisabled = c.dis
-    clk.widget.over = shift(dc, m.L2); clk.widget.overActive = shift(dc, m.L3); clk.widget.overDisabled = c.dis
-    clk.widget.pressed = shift(dc, m.L4); clk.widget.pressedActive = shift(dc, m.L4)
+    clk.color = dc; clk.widget.idle = dc
+    clk.widget.idleActive = dc
+    clk.widget.idleDisabled = c.dis
+    clk.widget.over = shift(dc, m.L2)
+    clk.widget.overActive = shift(dc, m.L3)
+    clk.widget.overDisabled = c.dis
+    clk.widget.pressed = shift(dc, m.L4)
+    clk.widget.pressedActive = shift(dc, m.L4)
   end
   if(data.same == true) then
-    clk.color = c.def; clk.widget.idle = c.def; clk.widget.idleActive = c.def; clk.widget.idleDisabled = c.def; clk.widget.over = c.def
-    clk.widget.overActive = c.def; clk.widget.overDisabled = c.def; clk.widget.pressed = c.def; clk.widget.pressedActive = c.def
+    clk.color = c.default
+    clk.widget.idle = c.default
+    clk.widget.idleActive = c.default
+    clk.widget.idleDisabled = c.default
+    clk.widget.over = c.default
+    clk.widget.overActive = c.default
+    clk.widget.overDisabled = c.default
+    clk.widget.pressed = c.default
+    clk.widget.pressedActive = c.default
   end
-  clk.paddingAllSides = data.pad or 0; clk.paddingTop = data.pt or 0; clk.paddingBottom = data.pb or 0; clk.paddingLeft = data.pl or 0; clk.paddingRight = data.pr or 0
-  clk.borderAllSides = data.brd or 0; clk.borderTop = data.bt or 0; clk.borderBottom = data.bb or 0; clk.borderLeft = data.bl or 0; clk.borderRight = data.br or 0
+
+  clk.paddingAllSides = data.pad or 0
+  clk.paddingTop = data.pt or 0
+  clk.paddingBottom = data.pb or 0
+  clk.paddingLeft = data.pl or 0
+  clk.paddingRight = data.pr or 0
+  clk.borderAllSides = data.brd or 0
+  clk.borderTop = data.bt or 0
+  clk.borderBottom = data.bb or 0
+  clk.borderLeft = data.bl or 0
+  clk.borderRight = data.br or 0
   clk.widthProportional = data.wp or 1.0
 
   return clk
